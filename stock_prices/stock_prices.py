@@ -24,95 +24,25 @@ output:
 current_min_price_so_far
 max_profit_so_far
 
----
-Algorithm 2
-
-find highest and lowest in prices
-if lowest comes before highest in sequence:
-    subtract lowest from highest, that's the positive profit
-
-if lowest comes after highest in sequence:
-    remove it and find next lowest
-    continue removing until we only have 2 numbers
-    subtract highest from lowest, that's the negative profit (loss)
-
-
-highest = max(prices)
-lowest = min(prices)
-
-if prices.index(lowest) < prices.index(highest):
-    return highest - lowest
-
-if prices.index(lowest) > prices.index(highest):
-
-    remove_lowest(prices, lowest)
-
-        if len(prices) == 2:
-            return prices
-
-        else:
-            (some kind of recursion)
-            prices.pop(prices.index(lowest))
-            lowest = min(prices)
-
-
-
-
----
-Algorithm
-
-current_min_price = prices[0]
-current_max_profit = prices[1] - prices[0]
-
-for i in range(0, len(prices)):
-    if prices[i] < current_min_price:
-        current_min_price = prices[i]
-
-    if (prices[i] - current_min_price)  > current_max_profit:
-        current_max_profit = (prices[i] - current_min_price)
-
-return current_max_profit
 '''
 
 import argparse
 
-# def find_max_profit(prices):
-#     cur_min_price = prices[0]
-#     cur_max_profit = prices[1] - prices[0]
-# 
-#     print('## cur_min_price', cur_min_price  )
-#     print('## cur_max_profit', cur_max_profit)
-# 
-#     for i in range(0, len(prices)):
-#         if prices[i] < cur_min_price:
-#             cur_min_price = prices[i]
-# 
-#         if (prices[i] - cur_min_price) > cur_max_profit:
-#             cur_max_profit = (prices[i] - cur_min_price)
-# 
-#         print('prices[i]', prices[i])
-#         print('cur_min_price', cur_min_price  )
-#         print('cur_max_profit', cur_max_profit)
-# 
-#     return cur_max_profit
+
+# passes tests except negative profit
 
 def find_max_profit(prices):
-    profit = 0
-    highest = max(prices)
-    lowest = min(prices)
+    cur_min_price = prices[0]
+    cur_max_profit = prices[1] - prices[0]
 
-    print('highest', highest)
-    print('lowest', lowest)
+    for i in range(0, len(prices)):
+        if prices[i] < cur_min_price:
+            cur_min_price = prices[i]
 
-    print('prices.index(lowest)', prices.index(lowest))
-    print('prices.index(highest)', prices.index(highest))
-    print('highest - lowest', highest - lowest )
+        if (prices[i] - cur_min_price) > cur_max_profit:
+            cur_max_profit = (prices[i] - cur_min_price)
 
-    if prices.index(lowest) < prices.index(highest):
-        profit = highest - lowest
-
-    return profit
-
+    return cur_max_profit
 
 
 
