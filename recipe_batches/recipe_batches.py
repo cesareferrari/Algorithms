@@ -25,8 +25,12 @@ def recipe_batches(recipe, ingredients):
     # all possible batches given the ingredients we have
     possible_batches = []
 
+    # ingredients[key] will throw an error if the key doesn't exist, so 
+    # I am using ingredients.get(key, default value) which returns
+    # the default if key is not there
+
     for key in recipe:
-        if ingredients.get(key, None):
+        if ingredients.get(key, None): 
             possible_batches.append(ingredients[key] // recipe[key])
         else:
             return 0
